@@ -51,7 +51,6 @@ const LastGuessInput = ({ parsedWords, setSelectedWords, setParsedWords }) => {
         }
       });
     }
-    console.log("tmpSelected: ", tmpSelected)
     setSelectedWords(tmpSelected);
     setSelectedWord('');
   };
