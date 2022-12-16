@@ -13,7 +13,7 @@ const TerminalWordsInput = ({ parsedWords }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="m-3">
+    <form onSubmit={handleSubmit}>
       <textarea className="w-100"onChange={handleChange} value={words} placeholder="Terminal Text"/><br />
       <button className="btn btn-primary w-100"type="submit">Submit</button>
     </form>

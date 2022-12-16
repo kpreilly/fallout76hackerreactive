@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 
-const LastGuessInput = ({ parsedWords, setSelectedWords }) => {
-  const [word, setWord] = useState('');
+const LastGuessInput = ({ parsedWords, setSelectedWords, setParsedWords }) => {
+  const [selectedWord, setSelectedWord] = useState('');
   const [number, setNumber] = useState(0);
 
   const handleWordChange = (event) => {
-    setWord(event.target.value);
+    let v = event.target.value;
+    setSelectedWord(prevSelectedWord => v);
   };
 
   const handleNumberChange = (event) => {
@@ -14,61 +15,72 @@ const LastGuessInput = ({ parsedWords, setSelectedWords }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // save a copy of word
-    let _w = word;
-    _w = _w.toUpperCase();
-    // set word to uppercase
+    const _w = selectedWord;
+    // remove selectedWord from parsedWords
+    const updatedParsedWords = parsedWords.filter(word => word !== _w);
+    setParsedWords(updatedParsedWords);
     const tmpSelected = [];
-    if (number !== 0) {
-      parsedWords.forEach((p_word) => {
-        if (p_word !== _w) {
-          let count = 0;
-          for (let i = 0; i < p_word.length; i++) {
-            if (p_word[i] === _w[i]) {
-              count += 1;
-            }
-          }
-          if (count === number) {
-            tmpSelected.push(p_word);
-          }
+    if (number === 0) {
+      // for each word in parsedWords
+      parsedWords.forEach(word => {
+        // if word is not equal to selectedWord
+        if (word !== _w) {
+          // add word to tmpSelected
+          tmpSelected.push(word);
         }
       });
     } else {
-      parsedWords.forEach((p_word) => {
-        let hasSimilarChar = false;
-        for (let i = 0; i < p_word.length; i++) {
-          if (p_word[i] === _w[i]) {
-            hasSimilarChar = true;
-            break;
+      // for each word in parsedWords
+      parsedWords.forEach(word => {
+        // if the word isn't equal to selectedWord
+        if (word !== _w) {
+          let count = 0;
+          // for each character in word
+          for (let i = 0; i < word.length; i++) {
+            // if the character is equal to the character at the same index in selectedWord
+            if (word[i] === _w[i]) {
+              // increment count
+              count++;
+            }
           }
-        }
-        if (!hasSimilarChar) {
-          tmpSelected.push(p_word);
+          // if count is equal to number
+          if (count === number) {
+            // add word to tmpSelected
+            tmpSelected.push(word);
+          }
         }
       });
     }
+    console.log("tmpSelected: ", tmpSelected)
     setSelectedWords(tmpSelected);
+    setSelectedWord('');
   };
 
   return (
-    <form onSubmit={handleSubmit} className="m-3">
-      <div className='mb-2'>
-        <div className="row">
-          <div className="col-sm-3">
-            <span>Last Guess</span>
-          </div>
-          <div className='col-sm-9'>
-            <input type="text" value={word} onChange={handleWordChange} placeholder="Last Guess" />
-          </div>
-        </div>
-        <div className="row">
-          <div className="col-sm-3">
-            <span>Similar Characters</span>
-          </div>
-          <div className="col-sm-9">
-            <input type="number" value={number} onChange={handleNumberChange} /><br />
-          </div>
-        </div>
+    <form onSubmit={handleSubmit}>
+      <div className='form-group'>
+        <label htmlFor="lastGuessInput">Last Guess</label>
+        <select
+          className="form-control"
+          id="lastGuessInput"
+          value={selectedWord}
+          onChange={handleWordChange}
+        >
+          <option value=''>Select a word</option>
+          {parsedWords.map(word => (
+            <option value={word} key={word}>{word}</option>
+          ))}
+        </select>
+      </div>
+      <div className='form-group mb-1'>
+        <label htmlFor="similarCharactersInput">Similar Characters</label>
+        <input
+          type="number"
+          className="form-control"
+          id="similarCharactersInput"
+          value={number}
+          onChange={handleNumberChange}
+        />
       </div>
       <button className="btn btn-primary w-100" type="submit">Submit</button>
     </form>
@@ -76,3 +88,4 @@ const LastGuessInput = ({ parsedWords, setSelectedWords }) => {
 };
 
 export default LastGuessInput;
+
