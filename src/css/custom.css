@@ -1,0 +1,109 @@
+/* Override default Bootstrap styles to use a darkula theme */
+
+/* Button color should be gradient from dark purple to light purple */
+.btn-primary {
+  background-color: #6934a5;
+  border-color: #541b94;
+  background-image: linear-gradient(to bottom, #7b4cb1, #3d0f72);
+}
+
+/* Button hover color should be plum */
+.btn-primary:hover {
+  background-color: #cc31fc;
+  border-color: #8a3aaf;
+  background-image: linear-gradient(to bottom, #7b4cb1, #3d0f72);
+}
+
+/* Darken the textarea background */
+textarea {
+  background-color: #222;
+}
+
+/* textarea selected border color should be plum */
+textarea:focus {
+  outline: 1px solid #cc31fc;
+}
+
+/* textarea placeholder and outline should be the same color as the text */
+textarea::placeholder {
+  color: rgb(114, 114, 114);
+}
+
+/* Darken the input background */
+input {
+  background-color: #222;
+}
+
+/* Darken the select background */
+select {
+  background-color: #222;
+  color: #ddd;
+}
+
+/* Select hover outline color should be plum */
+select:hover {
+  outline: 1px solid #cc31fc;
+}
+
+select:focus {
+  outline: 1px solid #cc31fc;
+}
+
+/* Darken the input background */
+input[type="number"] {
+  background-color: #222;
+}
+
+/* lighten the number input text color */
+input[type="number"] {
+  color: #ddd;
+}
+
+/* Darken number input selected background */
+input[type="number"]:focus {
+  background-color: #222;
+  color: #ddd;
+  outline: 1px solid #cc31fc;
+}
+
+/* Darken option background */
+option {
+  background-color: #222;
+  color: #ddd;
+}
+
+/* Darken The background, gradient from top-left to bottom right, Dark grey to black. Body should occupy the whole view area */
+body {
+  background-color: #222;
+}
+
+/* Lighten the text color */
+h1, h2, h3, h4, h5, h6, p, a, li, span, small, label, input, textarea, select, button {
+  color: #ddd;
+}
+
+/* Lists should be dark */
+ul, ol {
+  background-color: #222;
+  color: #ddd;
+}
+
+/* Forms with class form-control should have dark background and light text. They should stay the same colors when selected */
+.form-control {
+  background-color: #222;
+  color: #ddd;
+}
+
+/* selected .form-control should have a dark background and light text */
+.form-control:focus {
+  background-color: #222;
+  color: #ddd;
+  outline: 1px solid #cc31fc;
+}
+
+/* elements with list-group-item class should be dark with light text and a charcoal outline */
+.list-group-item {
+  background-color: #222;
+  color: #ddd;
+  border: 1px solid #333;
+}
