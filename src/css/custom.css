@@ -17,6 +17,7 @@
 /* Darken the textarea background */
 textarea {
   background-color: #222;
+  border: 1px solid #ddd;
 }
 
 /* textarea selected border color should be plum */
