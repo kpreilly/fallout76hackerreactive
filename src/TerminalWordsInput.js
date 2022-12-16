@@ -9,7 +9,7 @@ const TerminalWordsInput = ({ parsedWords }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    parsedWords(words.split(' ').map((word) => word.toUpperCase()));
+    parsedWords(words.split(/[\s,]+/).map((word) => word.toUpperCase()));
   };
 
   return (
